@@ -22,7 +22,9 @@ library(readxl) # install.packages("readxl")
 ```{r read data}
 
 ca_np <- read_csv(here("data/ca_np.csv"))
+ci_np <- read_xlsx("data/ci_np.xlsx")
 
-head(ca_np)
+names(ci_np)
+
 ```
 
