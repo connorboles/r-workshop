@@ -4,3 +4,15 @@ author: "Connor"
 date: "1/27/2020"
 output: html_document
 ---
+
+# Plots with ggplot2
+
+We are going to make plots in R using the ggplot2 package from the tidyverse
+
+```{r setup, message=FALSE}
+
+library(tidyverse)
+library(here) # install.packages("here")
+library(readxl) # install.packages("readxl")
+
+```
