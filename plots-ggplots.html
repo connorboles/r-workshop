@@ -376,6 +376,30 @@ summary {
 library(here) # install.packages(&quot;here&quot;)
 library(readxl) # install.packages(&quot;readxl&quot;)</code></pre>
 </div>
+<div id="california-national-parks-data" class="section level1">
+<h1>California National Parks Data</h1>
+<pre class="r"><code>ca_np &lt;- read_csv(here(&quot;data/ca_np.csv&quot;))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   region = col_character(),
+##   state = col_character(),
+##   code = col_character(),
+##   park_name = col_character(),
+##   type = col_character(),
+##   visitors = col_double(),
+##   year = col_double()
+## )</code></pre>
+<pre class="r"><code>head(ca_np)</code></pre>
+<pre><code>## # A tibble: 6 x 7
+##   region state code  park_name                     type          visitors  year
+##   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                         &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+## 1 PW     CA    CHIS  Channel Islands National Park National Park     1200  1963
+## 2 PW     CA    CHIS  Channel Islands National Park National Park     1500  1964
+## 3 PW     CA    CHIS  Channel Islands National Park National Park     1600  1965
+## 4 PW     CA    CHIS  Channel Islands National Park National Park      300  1966
+## 5 PW     CA    CHIS  Channel Islands National Park National Park    15700  1967
+## 6 PW     CA    CHIS  Channel Islands National Park National Park    31000  1968</code></pre>
+</div>
 
 
 
