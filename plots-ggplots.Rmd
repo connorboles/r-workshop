@@ -20,11 +20,50 @@ library(readxl) # install.packages("readxl")
 # California National Parks Data
 
 ```{r read data}
-
 ca_np <- read_csv(here("data/ca_np.csv"))
 ci_np <- read_xlsx("data/ci_np.xlsx")
 
 names(ci_np)
+```
+
+
+```{r line plot}
+ggplot(data = ci_np, aes(x = year, y = visitors)) + geom_line()
+```
+
+
+```{r base layer}
+gg_base <- (ggplot(data = ci_np, aes(x = year, y = visitors)))
 
 ```
 
+### Customization Notes
+
+- Line/Point colors: color
+- Change line type: linetype
+- Change point style: pch
+- Change transparency: alpha
+
+```{r customization start}
+gg_base + geom_line(
+  color = "purple", 
+  alpha = .7,
+  linetype = "dashed")
+```
+
+
+```{r}
+gg_base + geom_point(
+ pch = 17,
+ size = 2.5,
+ color = "blue")
+
+```
+
+```{r}
+gg_base +
+  geom_point(
+    aes(size = visitors, color = year),
+    pch = 17)
+
+```
