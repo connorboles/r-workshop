@@ -1,0 +1,104 @@
+---
+title: "Tidying Session"
+author: "Connor"
+date: "1/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+
+#Load Packages
+
+library(tidyverse)
+library(janitor)
+library(here)
+library(readxl)
+```
+
+### Read in inverts.xlsx
+
+
+```{r data load}
+inverts <- read_excel(here("data", "inverts.xlsx"))
+
+head(data)
+```
+
+```{r}
+inverts_long <- (pivot_longer(data = inverts, cols = c("2016" : "2018"), names_to = "year",
+             values_to = "sp_count"))
+```
+
+```{r}
+inverts_wide <- inverts_long %>% 
+  pivot_wider(names_from = common_name, values_from = sp_count )
+
+head(inverts_wide)
+```
+
+```{r}
+inverts_wide <-  clean_names(inverts_wide)
+
+head(inverts_wide)
+```
+
+### `tidyr::unite()` to combine information from columns
+
+Example: merge the site code and year into a single column called "site_year"
+
+
+```{r}
+inverts_unite <- inverts_long %>% 
+  unite(col = "site_year",
+        c(site, year), 
+        sep = "_")
+head(inverts_unite)
+```
+
+```{r}
+inverts_moyear <- inverts_long %>% 
+  unite(col = "mo_yr",
+        c(month, year),
+        sep = "/")
+head(inverts_moyear)
+```
+
+```{r}
+inverts_sep <- inverts_unite %>%
+  separate(site_year, into = c("my_site", "my_year"))
+head(inverts_sep)
+
+```
+
+### `stringr` + `mutate`
+
+Example: using built in trees set with `mutate` to add 5 to all of the tree heights
+
+```{r}
+trees_new <- trees %>% mutate(height_update = Height + 5)
+head (trees_new)
+
+```
+
+### `str_replace`
+
+```{r}
+ca_abbr <- inverts %>% mutate(common_name = 
+                                str_replace(common_name, 
+                                            pattern = "california", replacement = "CA"))
+  
+head(ca_abbr)
+```
+
+
+Example: in the common_name column you want to replace spiny with awesome
+
+```{r}
+spiny <- inverts %>% mutate(common_name = 
+                                str_replace(common_name, 
+                                            pattern = "spiny", replacement = "awesome"))
+  
+head(spiny)
+```
+
